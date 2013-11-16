@@ -3,4 +3,5 @@ class UserGroup < ActiveRecord::Base
 
   #relationships
   has_many :users
+
 end

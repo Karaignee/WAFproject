@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
             length: {in: (7..40)}
   validates :first_name, presence: true, length: {in: 2..30}
   validates :last_name, presence: true, length: {in: 2..40}
-  validates :user_group_id, presence: true, numericality: {only_integer: true, greater_than: 0}, inclusion: {in: UserGroup.full_list_of_ids, message: 'is not valid'}
+  validates :user_group_id, presence: true, numericality: {only_integer: true, greater_than: 0} #inclusion: {in: UserGroup.full_list_of_ids, message: 'is not valid'}
   validates :password, length: {minimum: 5}, on: :update, allow_nil: true, allow_blank: true
   validates :password, confirmation: true, if: '!password.nil?'
   validates :password_confirmation, presence: true, on: :create
