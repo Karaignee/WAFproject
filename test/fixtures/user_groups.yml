@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  description: MyText
+  is_an_admin: false
+  is_a_charity: false
+  is_a_volunteer: false
+
+two:
+  name: MyString
+  description: MyText
+  is_an_admin: false
+  is_a_charity: false
+  is_a_volunteer: false

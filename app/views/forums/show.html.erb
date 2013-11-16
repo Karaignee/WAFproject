@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @forum.title %>
+</p>
+
+<p>
+  <b>Body:</b>
+  <%= @forum.body %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @forum.user %>
+</p>
+
+
+<%= link_to 'Edit', edit_forum_path(@forum) %> |
+<%= link_to 'Back', forums_path %>

@@ -1,0 +1,39 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  login: MyString
+  first_name: MyString
+  last_name: MyString
+  crypted_password: MyString
+  password_salt: MyString
+  persistence_token: MyString
+  perishable_token: MyString
+  single_access_token: MyString
+  login_count: 1
+  failed_login_count: 1
+  last_request_at: 2013-11-16 10:40:48
+  current_login_at: 2013-11-16 10:40:48
+  last_login_at: 2013-11-16 10:40:48
+  current_login_ip: MyString
+  last_login_ip: MyString
+  active: false
+  user_group_id: 1
+
+two:
+  login: MyString
+  first_name: MyString
+  last_name: MyString
+  crypted_password: MyString
+  password_salt: MyString
+  persistence_token: MyString
+  perishable_token: MyString
+  single_access_token: MyString
+  login_count: 1
+  failed_login_count: 1
+  last_request_at: 2013-11-16 10:40:48
+  current_login_at: 2013-11-16 10:40:48
+  last_login_at: 2013-11-16 10:40:48
+  current_login_ip: MyString
+  last_login_ip: MyString
+  active: false
+  user_group_id: 1
