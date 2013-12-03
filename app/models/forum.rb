@@ -1,8 +1,8 @@
 class Forum < ActiveRecord::Base
-  belongs_to :user
+
   attr_accessible :body, :title
 
   #relationships
-  has_many :users
+  belongs_to :user
   has_many :comments
 end
