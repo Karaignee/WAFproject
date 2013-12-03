@@ -4,4 +4,5 @@ class Forum < ActiveRecord::Base
 
   #relationships
   has_many :users
+  has_many :comments
 end

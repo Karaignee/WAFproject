@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131116113718) do
+ActiveRecord::Schema.define(:version => 20131119192415) do
 
   create_table "comments", :force => true do |t|
     t.string   "commenter"
@@ -35,6 +35,11 @@ ActiveRecord::Schema.define(:version => 20131116113718) do
 
   add_index "forums", ["user_id"], :name => "index_forums_on_user_id"
 
+  create_table "homes", :force => true do |t|
+    t.string   "index"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "user_groups", :force => true do |t|
     t.string   "name"
@@ -70,6 +75,7 @@ ActiveRecord::Schema.define(:version => 20131116113718) do
     t.integer  "user_group_id"
     t.datetime "created_at",                                            :null => false
     t.datetime "updated_at",                                            :null => false
+    t.string   "persistence_token"
   end
 
 end
