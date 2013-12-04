@@ -8,7 +8,8 @@ Wafproject::Application.routes.draw do
   resources :user_sessions
 
   resources :forums
-      post 'forums/create_comments'    #this tells the routing system how to handle a post request (new information to create).
+
+  resources :comments, only: [:create, :update, :destroy]
 
   resources :users
 

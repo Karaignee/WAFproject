@@ -4,32 +4,21 @@ class ForumsController < ApplicationController
   def index
     @forums = Forum.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @forums }
-    end
   end
 
   # GET /forums/1
   # GET /forums/1.json
   def show
     @forum = Forum.find(params[:id])
+    @comment = Comment.new
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @forum }
-    end
-  end
+   end
 
   # GET /forums/new
   # GET /forums/new.json
   def new
     @forum = Forum.new
 
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @forum }
-    end
   end
 
   # GET /forums/1/edit

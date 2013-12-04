@@ -1,0 +1,11 @@
+<div style="border:1px solid orange;">
+  <%= link_to 'Home', root_url %>
+  <%= link_to 'Forum', forums_url %>
+  <% if current_user %>
+   <%= link_to 'My Account', my_account_url %>
+   <%= link_to 'Sign Out', logout_url %>
+  <% else %>
+   <%= link_to 'Sign Up', sign_up_url %>
+   <%= link_to 'Sign In', sign_in_url %>
+  <% end %>
+</div>

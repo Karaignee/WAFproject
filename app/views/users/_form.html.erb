@@ -24,52 +24,12 @@
     <%= f.text_field :last_name %>
   </div>
   <div class="field">
-    <%= f.label :crypted_password %><br />
-    <%= f.text_field :crypted_password %>
+    <%= f.label :password %><br />
+    <%= f.password_field :password %>
   </div>
   <div class="field">
-    <%= f.label :password_salt %><br />
-    <%= f.text_field :password_salt %>
-  </div>
-  <div class="field">
-    <%= f.label :persistence_token %><br />
-    <%= f.text_field :persistence_token %>
-  </div>
-  <div class="field">
-    <%= f.label :perishable_token %><br />
-    <%= f.text_field :perishable_token %>
-  </div>
-  <div class="field">
-    <%= f.label :single_access_token %><br />
-    <%= f.text_field :single_access_token %>
-  </div>
-  <div class="field">
-    <%= f.label :login_count %><br />
-    <%= f.number_field :login_count %>
-  </div>
-  <div class="field">
-    <%= f.label :failed_login_count %><br />
-    <%= f.number_field :failed_login_count %>
-  </div>
-  <div class="field">
-    <%= f.label :last_request_at %><br />
-    <%= f.datetime_select :last_request_at %>
-  </div>
-  <div class="field">
-    <%= f.label :current_login_at %><br />
-    <%= f.datetime_select :current_login_at %>
-  </div>
-  <div class="field">
-    <%= f.label :last_login_at %><br />
-    <%= f.datetime_select :last_login_at %>
-  </div>
-  <div class="field">
-    <%= f.label :current_login_ip %><br />
-    <%= f.text_field :current_login_ip %>
-  </div>
-  <div class="field">
-    <%= f.label :last_login_ip %><br />
-    <%= f.text_field :last_login_ip %>
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation %>
   </div>
   <div class="field">
     <%= f.label :active %><br />
@@ -77,7 +37,7 @@
   </div>
   <div class="field">
     <%= f.label :user_group_id %><br />
-    <%= f.number_field :user_group_id %>
+    <%= f.number_field :user_group_id %>    <!-- TODO: need to make this a collection select -->
   </div>
   <div class="actions">
     <%= f.submit %>

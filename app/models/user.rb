@@ -1,5 +1,31 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id                  :integer          not null, primary key
+#  login               :string(255)
+#  first_name          :string(255)
+#  last_name           :string(255)
+#  crypted_password    :string(128)      default(""), not null
+#  password_salt       :string(128)      default(""), not null
+#  perishable_token    :string(255)
+#  single_access_token :string(255)
+#  login_count         :integer          default(0)
+#  failed_login_count  :integer          default(0)
+#  last_request_at     :datetime
+#  current_login_at    :datetime
+#  last_login_at       :datetime
+#  current_login_ip    :string(255)
+#  last_login_ip       :string(255)
+#  active              :boolean          default(FALSE), not null
+#  user_group_id       :integer
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  persistence_token   :string(255)
+#
+
 class User < ActiveRecord::Base
-  attr_accessible :active, :crypted_password, :current_login_at, :current_login_ip, :failed_login_count, :first_name, :last_login_at, :last_login_ip, :last_name, :last_request_at, :login, :login_count, :password_salt, :perishable_token, :persistence_token, :single_access_token, :user_group_id
+  attr_accessible :active, :current_login_at, :current_login_ip, :failed_login_count, :first_name, :last_login_at, :last_login_ip, :last_name, :last_request_at, :login, :login_count, :perishable_token, :persistence_token, :single_access_token, :user_group_id, :password, :password_confirmation
 
   acts_as_authentic do |c|
     if Rails.env.production?
@@ -8,6 +34,12 @@ class User < ActiveRecord::Base
       c.logged_in_timeout = 120.minutes
     end
   end
+
+  #relationships
+  belongs_to :user_group
+  has_many :comments
+  has_many :forums
+
 
   # validation
   validates :login, presence: true, uniqueness: true,
@@ -20,8 +52,15 @@ class User < ActiveRecord::Base
   validates :password, confirmation: true, if: '!password.nil?'
   validates :password_confirmation, presence: true, on: :create
 
+  #methods
   def full_name
-    return first_name.titleize + " " + last.name.gsub("O\'", "O\'").titleize.gsub("O\'", "O\'")
+    return first_name.titleize + " " + last_name.gsub("O\'", "O\'").titleize.gsub("O\'", "O\'")
   end
+
+  def admin?
+    self.user_group.is_an_admin
+  end
+
+
 
 end
