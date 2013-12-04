@@ -17,5 +17,6 @@ class Comment < ActiveRecord::Base
   attr_accessible :body, :user_id, :forum_id
 
   #validation
-  #validates :body, presence: true    TODO:
+  validates :body, presence: true
+
 end

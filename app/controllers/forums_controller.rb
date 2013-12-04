@@ -1,6 +1,10 @@
 class ForumsController < ApplicationController
-  # GET /forums
-  # GET /forums.json
+
+  before_filter :logged_in_required, except: [:show, :index ]
+  before_filter :admin_required, except: [:show, :index, :create, :update, :new, :edit]
+  #before_filter :get_variables
+  #before_filter :start_breadcrumbs
+
   def index
     @forums = Forum.all
 
@@ -12,24 +16,21 @@ class ForumsController < ApplicationController
     @forum = Forum.find(params[:id])
     @comment = Comment.new
 
-   end
+  end
 
-  # GET /forums/new
-  # GET /forums/new.json
   def new
     @forum = Forum.new
 
   end
 
-  # GET /forums/1/edit
   def edit
     @forum = Forum.find(params[:id])
   end
 
-  # POST /forums
-  # POST /forums.json
   def create
     @forum = Forum.new(params[:forum])
+    @forum = Forum.new(user_id: current_user.id)
+
 
     respond_to do |format|
       if @forum.save
