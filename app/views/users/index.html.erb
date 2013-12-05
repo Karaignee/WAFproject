@@ -1,46 +1,32 @@
-<h1>Listing users</h1>
 
-<table>
+<div class="page-header">
+<h1>All Users</h1>
+</div>
+
+<% @users.each do |user|%>
+<% end %>
+<table class="table table-striped">
+  <thead><strong>
   <tr>
     <th>Login</th>
     <th>First name</th>
     <th>Last name</th>
-    <th>Crypted password</th>
-    <th>Password salt</th>
-    <th>Persistence token</th>
-    <th>Perishable token</th>
-    <th>Single access token</th>
-    <th>Login count</th>
-    <th>Failed login count</th>
-    <th>Last request at</th>
-    <th>Current login at</th>
-    <th>Last login at</th>
-    <th>Current login ip</th>
-    <th>Last login ip</th>
+    <th>Password</th>
     <th>Active</th>
     <th>User group</th>
     <th></th>
     <th></th>
     <th></th>
   </tr>
+  </strong></thead>
+
 
 <% @users.each do |user| %>
   <tr>
     <td><%= user.login %></td>
     <td><%= user.first_name %></td>
     <td><%= user.last_name %></td>
-    <td><%= user.crypted_password %></td>
-    <td><%= user.password_salt %></td>
-    <td><%= user.persistence_token %></td>
-    <td><%= user.perishable_token %></td>
-    <td><%= user.single_access_token %></td>
-    <td><%= user.login_count %></td>
-    <td><%= user.failed_login_count %></td>
-    <td><%= user.last_request_at %></td>
-    <td><%= user.current_login_at %></td>
-    <td><%= user.last_login_at %></td>
-    <td><%= user.current_login_ip %></td>
-    <td><%= user.last_login_ip %></td>
+    <td><%= user.password %></td>
     <td><%= user.active %></td>
     <td><%= user.user_group_id %></td>
     <td><%= link_to 'Show', user %></td>
