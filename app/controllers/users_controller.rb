@@ -2,6 +2,9 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
 
+
+#TODO: method for showing the profiles will be an if, elseif, else, end statement controlling the 3 views.  Are my routes set up for this?
+
   def new_ngo_profile
     @ngo_profile = NgoProfile.new(params[:ngo_profile])
     @ngo_profile.user_id = current_user.id

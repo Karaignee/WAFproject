@@ -1,0 +1,10 @@
+.well {style: 'padding-left: 15px;'}
+  %h2 Categories
+    -forums.each do |this_topic|
+    =link_to this_topic.forum_title.titleize, forum_path(this_topic)
+  %br/
+  -if current_user
+    =link_to 'New Topic', new_forum_path, class: 'btn btn-success'
+  -if params[:action] != 'index'
+    = link_to 'Return to Forum', forums_path
+

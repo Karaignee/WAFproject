@@ -1,6 +1,4 @@
 Wafproject::Application.routes.draw do
-  get "home/index"
-
 
   resources :forums
 
@@ -31,6 +29,10 @@ Wafproject::Application.routes.draw do
   match 'new_ngo_profile' => 'users#new_ngo_profile', as: :new_ngo_profile
   match 'edit_vol_profile' => 'users#edit_vol_profile', as: :edit_vol_profile
   match 'edit_ngo_profile' => 'users#edit_ngo_profile', as: :edit_ngo_profile
+
+  post '/search' => 'home#search', as: :search_request
+  get "home/index"
+
 
 
   # The priority is based upon order of creation:

@@ -1,18 +1,22 @@
-<h1>Listing forums</h1>
+<h1>Discussions and Questions</h1>
 
-<table>
+<!--TODO @latest_created.each do-->
+
+<table colspan="9" class='table table-bordered table-striped'>
   <tr>
     <th>Title</th>
     <th>Body</th>
-    <th></th>
-    <th></th>
+    <th>Contributor</th>
+    <th>Comments</th>
     <th></th>
   </tr>
 
 <% @forums.each do |forum| %>
   <tr>
-    <td><%= forum.title %></td>
+    <td><%= forum.title %></td>      <!--TODO: make clickable -->
     <td><%=h truncate(forum.body, :length => 20) %> </td>
+    <td> Name </td>
+    <td><%= forum.comments.count %></td>
     <td><%= link_to 'Show', forum %></td>
     <td><%= link_to 'Edit', edit_forum_path(forum) %></td>
     <td><%= link_to 'Destroy', forum, method: :delete, data: { confirm: 'Are you sure?' } %></td>

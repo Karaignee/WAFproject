@@ -19,8 +19,8 @@ class Forum < ActiveRecord::Base
   has_many :comments
 
   #validation
-  validates :body, presence: true
-  validates :title, presence: true
+  #validates :body, presence: true
+  #validates :title, presence: true
   validates :user_id, presence: true, numericality: {only_integer: true, greater_than: 0}
 
 end

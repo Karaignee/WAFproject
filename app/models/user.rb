@@ -63,6 +63,20 @@ class User < ActiveRecord::Base
     self.user_group.is_an_admin
   end
 
+  def self.search_request(user_search)
+    search_result = []
+    records = User.where('first_name LIKE ? or last_name LIKE ?', '%' + user_search + '%', '%' + user_search + '%')
+
+    if records.count > 0
+      records.uniq.each do |x|
+        search_result << {model_name: 'User', url: '/users/' + x.id.to_s, name: x.full_name, description: x.full_name }
+      end
+    end
+    search_result
+  end
+
+
+
 
 
 end

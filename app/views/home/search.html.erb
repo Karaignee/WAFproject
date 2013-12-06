@@ -1,0 +1,14 @@
+<% if @search_results.size > 0 %>
+    <p>Here are your <%= @search_results.count %> results:</p>
+
+    <%  @search_results.each do |one_result|  %>
+        <p> <%= link_to one_result[:name], one_result[:url] %></p>
+        <p> <%= link_to 'https://devgrads.com' + truncate(one_result[:url], length: 50), one_result[:url] %></p>
+        <p> <%= one_result[:description] %></p>
+    <% end %>
+
+<% else %>
+
+    <p>Nothing found: try again...</p>
+
+<% end %>

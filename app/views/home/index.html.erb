@@ -1,2 +1,40 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+
+<!-- Bootstrap Jumbotron -->
+<div class="jumbotron">
+  <h1>Marketing stuff!</h1>
+  <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+
+  <form class="form-search">
+    <input type="text" class="input-medium search-query">
+    <button type="submit" class="btn">Search</button>
+  </form>
+  form_tag(search_request_url
+  <% if current_user %>
+      <li><%= link_to 'My Account', my_account_url, class:"btn btn-success" %></li>
+      <li><%= link_to 'Sign Out', logout_url, class:"btn btn-success" %>  </li>
+  <% else %>
+      <li><%= link_to 'Sign Up', sign_up_url, class:"btn btn-success" %> </li>
+      <li><%= link_to 'Sign In', sign_in_url, class:"btn btn-success" %> </li>
+  <% end %>
+</div>
+
+<!-- End of Bootstrap Jumbotron -->
+
+<!-- Three columns -->
+<div class="row-fluid">
+  <div class="span4">
+    <h2>Volunteers</h2>
+    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+    <p><a class="btn" href="#">link_to &raquo;</a></p>
+  </div>
+  <div class="span4">
+    <h2>Charities</h2>
+    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+    <p><a class="btn" href="#">link_to &raquo;</a></p>
+  </div>
+  <div class="span4">
+    <h2>Projects</h2>
+    <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.</p>
+    <p><a class="btn" href="#">link_to &raquo;</a></p>
+  </div>
+</div>
