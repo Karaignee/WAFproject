@@ -10,8 +10,6 @@ class ForumsController < ApplicationController
 
   end
 
-  # GET /forums/1
-  # GET /forums/1.json
   def show
     @forum = Forum.find(params[:id])
     @comment = Comment.new
@@ -29,18 +27,14 @@ class ForumsController < ApplicationController
 
   def create
     @forum = Forum.new(params[:forum])
-    @forum = Forum.new(user_id: current_user.id)
+    @forum.user_id = current_user.id
 
 
-    respond_to do |format|
       if @forum.save
-        format.html { redirect_to @forum, notice: 'Forum was successfully created.' }
-        format.json { render json: @forum, status: :created, location: @forum }
+        redirect_to @forum, notice: 'Forum was successfully created.'
       else
-        format.html { render action: "new" }
-        format.json { render json: @forum.errors, status: :unprocessable_entity }
+        render action: "new"
       end
-    end
   end
 
   # PUT /forums/1

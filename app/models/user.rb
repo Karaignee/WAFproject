@@ -39,8 +39,8 @@ class User < ActiveRecord::Base
   belongs_to :user_group
   has_many :comments
   has_many :forums
-  has_many :vol_profiles
-  has_many :ngo_profiles
+  has_one :vol_profile
+  has_one :ngo_profile   # if I want to enforce the rule that user can only have one profile I can call these has_one
 
 
   # validation
@@ -56,7 +56,7 @@ class User < ActiveRecord::Base
 
   #methods
   def full_name
-    return first_name.titleize + " " + last_name.gsub("O\'", "O\'").titleize.gsub("O\'", "O\'")
+    return first_name.titleize + " " + last_name.gsub("O'", "O' ").titleize.gsub("O' ", "O'")
   end
 
   def admin?
@@ -69,7 +69,7 @@ class User < ActiveRecord::Base
 
     if records.count > 0
       records.uniq.each do |x|
-        search_result << {model_name: 'User', url: '/users/' + x.id.to_s, name: x.full_name, description: x.full_name }
+        search_result << {model_name: 'User', url: '/users/' + x.id.to_s, name: x.full_name, description: x.full_name}
       end
     end
     search_result

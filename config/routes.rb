@@ -25,10 +25,10 @@ Wafproject::Application.routes.draw do
   match 'register' => 'users#new', :as => :register
   match 'change_password' => 'users#change_password', :as => :change_password
 
-  match 'new_vol_profile' => 'users#new_vol_profile', as: :new_vol_profile
-  match 'new_ngo_profile' => 'users#new_ngo_profile', as: :new_ngo_profile
-  match 'edit_vol_profile' => 'users#edit_vol_profile', as: :edit_vol_profile
-  match 'edit_ngo_profile' => 'users#edit_ngo_profile', as: :edit_ngo_profile
+  post 'create_vol_profile' => 'users#create_vol_profile', as: :create_vol_profile
+  post 'create_ngo_profile' => 'users#create_ngo_profile', as: :create_ngo_profile
+  put 'update_vol_profile' => 'users#update_vol_profile', as: :update_vol_profile
+  put 'update_ngo_profile' => 'users#update_ngo_profile', as: :update_ngo_profile
 
   post '/search' => 'home#search', as: :search_request
   get "home/index"

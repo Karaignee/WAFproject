@@ -1,33 +1,35 @@
 class UsersController < ApplicationController
-  # GET /users
-  # GET /users.json
 
 
+#TODO: before filters
 #TODO: method for showing the profiles will be an if, elseif, else, end statement controlling the 3 views.  Are my routes set up for this?
 
-  def new_ngo_profile
+  def create_ngo_profile
     @ngo_profile = NgoProfile.new(params[:ngo_profile])
     @ngo_profile.user_id = current_user.id
     if @ngo_profile.save
-      flash[:success] = 'Your details have been saved.'
+      flash[:success] = 'Your profile has been created.'
       redirect_to current_user
     else
       render 'show'
     end
   end
 
-  def edit_ngo_profile
+  def update_ngo_profile
     @ngo_profile = NgoProfile.find(params[:id])
     params[:ngo_profile][:user_id] = current_user.id
-    if @ngo_profile.update(params[:about])
-
+    if @ngo_profile.update_attributes(params[:ngo_profile])
+      flash[:success] = 'Your profile has been updated.'
+      redirect_to current_user
+    else
+      render 'show'
     end
 
   end
 
 
-  def new_vol_profile
-    @vol_profile = VolProfile.new(params[:skill])
+  def create_vol_profile
+    @vol_profile = VolProfile.new(params[:vol_profile])
     @vol_profile.user_id = current_user.id
     if @vol_profile.save
       flash[:success] = 'Your About section has been saved.'
@@ -38,10 +40,10 @@ class UsersController < ApplicationController
 
   end
 
-  def edit_vol_profile
+  def update_vol_profile
     @vol_profile = VolProfile.find(params[:id])
     params[:vol_profile][:user_id] = current_user.id
-    if @vol_profile.update(params[:about])
+    if @vol_profile.update_attributes(params[:vol_profile])
       flash[:success] = 'Your skill details have been updated.'
     else
       flash[:error] = 'Sorry, an error occurred. ' + @vol_profile.errors.full_messages.to_sentence
@@ -60,7 +62,8 @@ class UsersController < ApplicationController
     else
       @user = current_user
     end
-
+    @ngo_profile = NgoProfile.new
+    @vol_profile = VolProfile.new
   end
 
    def new
@@ -75,14 +78,10 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
 
-    respond_to do |format|
-      if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
-        format.json { render json: @user, status: :created, location: @user }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
+    if @user.save
+      redirect_to @user, notice: 'User was successfully created.'
+    else
+      render action: "new"
     end
   end
 
@@ -91,20 +90,16 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
 
-    respond_to do |format|
-      if @user.update_attributes(params[:user])
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
+    if @user.update_attributes(params[:user])
+       redirect_to @user, notice: 'User was successfully updated.'
+    else
+      render action: "edit"
     end
   end
 
   def destroy
     @user = User.find(params[:id])
     @user.destroy
-
+    redirect_to users_url
   end
 end
