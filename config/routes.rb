@@ -1,15 +1,17 @@
 Wafproject::Application.routes.draw do
   get "home/index"
 
+
+  resources :forums
+
+  resources :comments, only: [:create, :update, :destroy]
+
+  #users
   get "user_sessions/new"
 
   resources :user_groups
 
   resources :user_sessions
-
-  resources :forums
-
-  resources :comments, only: [:create, :update, :destroy]
 
   resources :users
 
@@ -25,6 +27,10 @@ Wafproject::Application.routes.draw do
   match 'register' => 'users#new', :as => :register
   match 'change_password' => 'users#change_password', :as => :change_password
 
+  match 'new_vol_profile' => 'users#new_vol_profile', as: :new_vol_profile
+  match 'new_ngo_profile' => 'users#new_ngo_profile', as: :new_ngo_profile
+  match 'edit_vol_profile' => 'users#edit_vol_profile', as: :edit_vol_profile
+  match 'edit_ngo_profile' => 'users#edit_ngo_profile', as: :edit_ngo_profile
 
 
   # The priority is based upon order of creation:

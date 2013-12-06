@@ -39,6 +39,8 @@ class User < ActiveRecord::Base
   belongs_to :user_group
   has_many :comments
   has_many :forums
+  has_many :vol_profiles
+  has_many :ngo_profiles
 
 
   # validation

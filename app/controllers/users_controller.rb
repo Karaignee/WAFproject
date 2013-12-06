@@ -1,6 +1,51 @@
 class UsersController < ApplicationController
   # GET /users
   # GET /users.json
+
+  def new_ngo_profile
+    @ngo_profile = NgoProfile.new(params[:ngo_profile])
+    @ngo_profile.user_id = current_user.id
+    if @ngo_profile.save
+      flash[:success] = 'Your details have been saved.'
+      redirect_to current_user
+    else
+      render 'show'
+    end
+  end
+
+  def edit_ngo_profile
+    @ngo_profile = NgoProfile.find(params[:id])
+    params[:ngo_profile][:user_id] = current_user.id
+    if @ngo_profile.update(params[:about])
+
+    end
+
+  end
+
+
+  def new_vol_profile
+    @vol_profile = VolProfile.new(params[:skill])
+    @vol_profile.user_id = current_user.id
+    if @vol_profile.save
+      flash[:success] = 'Your About section has been saved.'
+      redirect_to current_user
+    else
+      render 'show'
+    end
+
+  end
+
+  def edit_vol_profile
+    @vol_profile = VolProfile.find(params[:id])
+    params[:vol_profile][:user_id] = current_user.id
+    if @vol_profile.update(params[:about])
+      flash[:success] = 'Your skill details have been updated.'
+    else
+      flash[:error] = 'Sorry, an error occurred. ' + @vol_profile.errors.full_messages.to_sentence
+    end
+    redirect_to current_user
+  end
+
   def index
     @users = User.all
 
