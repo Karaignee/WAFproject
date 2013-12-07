@@ -1,7 +1,9 @@
 class UsersController < ApplicationController
 
+  before_filter :logged_in_required, except: [:new, :create, :activate]
+  before_filter :admin_required, only: [:destroy]
+  #before_filter :start_breadcrumbs
 
-#TODO: before filters
 #TODO: method for showing the profiles will be an if, elseif, else, end statement controlling the 3 views.  Are my routes set up for this?
 
   def create_ngo_profile

@@ -1,7 +1,7 @@
 class ForumsController < ApplicationController
 
   before_filter :logged_in_required, except: [:show, :index ]
-  before_filter :admin_required, except: [:show, :index, :create, :update, :new, :edit]
+  before_filter :admin_required, only: [:destroy]
   #before_filter :get_variables
   #before_filter :start_breadcrumbs
 

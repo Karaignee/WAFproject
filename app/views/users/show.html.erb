@@ -1,4 +1,10 @@
-<h1>Profile</h1>
+<div class="page-header">
+<% if current_user.id == @user.id %>
+<h1> Your Profile</h1>
+      <% else %>
+ <h1> Member's Profile</h1>
+  <% end %>
+</div>
 
 <p>
   <b>Login:</b>
@@ -19,6 +25,11 @@
   <b>User group:</b>
   <%= @user.user_group.name %>
 </p>
+
+<%= link_to 'Edit log-in details', edit_user_path(@user) %>
+<!-- make the back button admin only-->
+| <%= link_to 'Back', users_path %>
+
 <% if @user.ngo_profile %>
   <div id="view_ngo_profile">
     <h4>Your NGO Profile:</h4>
@@ -72,18 +83,58 @@
     <% end %>
     <%= render partial: 'ngo_form', locals: {f: f} %>
   <% end %>
+<% end %>
 
-  <!-- TODO: if current.user is signed in elsif is charity elsif is volunteer else is admin end  -->
-  <!-- TODO: if elseif else end for viewing show_to_self, show_to_admin, show_to_others -->
-  <!-- TODO: profile pics, word tagging, formatting -->
+
+    <% if @user.vol_profile %>
+        <div id="view_vol_profile">
+          <h4>Your Volunteer Profile:</h4>
+          <table>
+            <tr>
+              <td>About:</td>
+              <td><%= @user.vol_profile.about %></td>
+            </tr>
+            <tr>
+              <td>Details:</td>
+              <td><%= @user.vol_profile.details %></td>
+            </tr>
+            <tr>
+              <td>Skills:</td>
+              <td><%= @user.vol_profile.skills %></td>
+            </tr>
+          </table>
+          <%= link_to 'Edit Volunteer Profile', '#', onclick: "showVolEditProfile(); return false;" %>
+        </div>
+
+        <div id="edit_the_vol_form" class="hidden">
+          <h4>Edit your Volunteer Profile:</h4>
+          <%= form_for(@user.vol_profile, url: update_vol_profile_url) do |f| %>
+              <%= hidden_field_tag :id, @user.vol_profile.id %>
+              <% if @vol_profile.errors.any? %>
+                  <div id="error_explanation">
+                    <h2><%= pluralize(@vol_profile.errors.count, "error") %> prohibited this profile from being saved:</h2>
+                  </div>
+              <% end %>
+              <%= render partial: 'vol_form', locals: {f: f} %>
+          <% end %>
+        </div>
+
+    <% else %>
+
+        <h4>Create a new Volunteer Profile</h4>
+        <%= form_for(@vol_profile, url: create_vol_profile_url) do |f| %>    <!--needed to specify the url here because there is no controller for @vol_profile-->
+            <% if @vol_profile.errors.any? %>
+                <div id="error_explanation">
+                  <h2><%= pluralize(@vol_profile.errors.count, "error") %> prohibited this profile from being saved:</h2>
+                </div>
+            <% end %>
+            <%= render partial: 'vol_form', locals: {f: f} %>
+        <% end %>
+
 
 <% end %>
 
 
-<!-- will need to change the position of the edit and back tags as it refers to edit user -->
-<%= link_to 'Edit', edit_user_path(@user) %>
-<!-- make the back button admin only-->
-| <%= link_to 'Back', users_path %>
 
 <script>
 
@@ -94,4 +145,17 @@
      $('#edit_the_ngo_form').removeClass('hidden');
    }
 
+   function showVolEditProfile() {
+       // hide the show part
+       $('#view_vol_profile').hide();
+       // reveal the edit form
+       $('#edit_the_vol_form').removeClass('hidden');
+   }
+
 </script>
+
+
+
+<!-- TODO: if current.user is signed in elsif is charity elsif is volunteer else is admin end  -->
+<!-- TODO: if elseif else end for viewing show_to_self, show_to_admin, show_to_others -->
+<!-- TODO: profile pics, word tagging, formatting -->

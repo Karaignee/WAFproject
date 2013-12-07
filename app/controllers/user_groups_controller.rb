@@ -1,5 +1,9 @@
 class UserGroupsController < ApplicationController
 
+  before_filter :logged_in_required
+  before_filter :admin_required
+
+
   def index
     @user_groups = UserGroup.all
 

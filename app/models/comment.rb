@@ -19,4 +19,14 @@ class Comment < ActiveRecord::Base
   #validation
   validates :body, presence: true
 
+  def self.search_request(comment_search)
+    search_result = []
+    records = where('body LIKE ?' '%' + comment_search + '%')
+    records.each do |x|
+      search_result << {model_name: 'Comment', url: '/comments/' + x.comment_id.to_s, name: x.body, description: x.body}
+
+    end
+    search_result
+  end
+
 end

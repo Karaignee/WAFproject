@@ -23,4 +23,13 @@ class Forum < ActiveRecord::Base
   #validates :title, presence: true
   validates :user_id, presence: true, numericality: {only_integer: true, greater_than: 0}
 
+  #methods
+  def self.search_request(forum_search)
+    search_result = []
+    records = where('title LIKE ? OR body LIKE ?','%' + forum_search + '%', '%' + forum_search + '%')
+    records.each do |x|
+      search_result << {model_name: 'Forum', url: '/forums/' + x.id.to_s, name: x.body, description: x.body}
+    end
+    search_result
+  end
 end

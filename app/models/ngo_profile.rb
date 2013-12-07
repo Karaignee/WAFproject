@@ -21,4 +21,18 @@ class NgoProfile < ActiveRecord::Base
 
   #relationships
   belongs_to :user
-end
+
+  #methods
+  def self.search_request(ngo_profile_search)
+    search_result = []
+    records = where('about LIKE ? or details LIKE ? or links LIKE ? or name LIKE ?', '%' + ngo_profile_search + '%', '%' + ngo_profile_search + '%', '%' + ngo_profile_search + '%', '%' + ngo_profile_search + '%')
+    records.each do |x|
+      search_result << {model_name: 'NgoProfile', url: '/users/' + x.user_id.to_s, name: x.name, description: x.details}
+
+    end
+    search_result
+  end
+
+
+
+  end

@@ -4,11 +4,15 @@
   <h1>Marketing stuff!</h1>
   <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
 
-  form_tag(search_request_url)
-  <form class="form-search">
-    <input type="text" class="input-medium search-query">
-    <button type="submit" class="btn">Search</button>
-  </form>
+  <% if current_user %>
+      <%= form_tag(search_request_url, class: 'form-search') do %>
+          <div id="search">
+            <%= text_field_tag :search_for_this, nil, id: 'search_text', placeholder: 'search...' %>
+            <%= submit_tag '', id: 'search_button' %>
+          </div>
+      <% end %>
+      <% end %>
+
 
   <% if current_user %>
       <li><%= link_to 'My Account', my_account_url, class:"btn btn-success" %></li>

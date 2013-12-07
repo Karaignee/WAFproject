@@ -1,8 +1,11 @@
 class ApplicationController < ActionController::Base
 
-  protect_from_forgery
+
+  Time::DATE_FORMATS[:simple] = '%d %b %Y'
+  Time::DATE_FORMATS[:standard] = '%e %b %Y %H:%M'
+
   helper :all
-  helper_method :current_user_session, :current_user
+  helper_method :current_user_session, :current_user, :admin_required
 
   private
 
