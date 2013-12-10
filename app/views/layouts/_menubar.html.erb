@@ -2,19 +2,29 @@
   <div class="navbar-inner">
     <div class="container">
 
-  <a class="brand"><%= link_to 'Home', root_url %> </a>
+
       <div class="nav-collapse collapse">
         <ul class="nav">
-  <li class="active"><%= link_to 'Forum', forums_url %></li>
+  <li> <%= link_to 'Home', root_url %>  </li>
+  <li><%= link_to 'Forum', forums_url %></li>
   <% if current_user %>
    <li><%= link_to 'My Account', my_account_url %></li>
    <li><%= link_to 'Sign Out', logout_url %>  </li>
   <% else %>
    <li><%= link_to 'Sign Up', sign_up_url %> </li>
    <li><%= link_to 'Sign In', sign_in_url %> </li>
-        <% end %>
+   <% end %>
+   <li><%= link_to 'Browse Users', users_path %></li>
         </ul>
       </div>
+    <% if current_user %>
+      <%= form_tag(search_request_url, class: 'form-search') do %>
+      <div id="search">
+        <%= text_field_tag :search_for_this, nil, id: 'search_text', placeholder: 'search...' %>
+        <%= submit_tag 'Search', id: 'search_button' %>
+      </div>
+        <% end %>
+     <% end %>
     </div>
   </div>
 </div>
