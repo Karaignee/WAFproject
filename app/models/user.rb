@@ -63,6 +63,14 @@ class User < ActiveRecord::Base
     self.user_group.is_an_admin
   end
 
+  def charity?
+    self.user_group.is_a_charity
+  end
+
+  def volunteer?
+    self.user_group.is_a_volunteer
+  end
+
   def self.search_request(user_search)
     search_result = []
     records = User.where('first_name LIKE ? or last_name LIKE ?', '%' + user_search + '%', '%' + user_search + '%')

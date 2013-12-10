@@ -1,0 +1,24 @@
+<h4>Your NGO Profile:</h4>
+<table>
+  <tr>
+    <td>Name:</td>
+    <td><%= @user.ngo_profile.name %></td>
+  </tr>
+  <tr>
+    <td>About:</td>
+    <td><%= @user.ngo_profile.about %></td>
+  </tr>
+  <tr>
+    <td>Details:</td>
+    <td><%= @user.ngo_profile.details %></td>
+  </tr>
+  <tr>
+    <td>Links:</td>
+    <td>
+      <% @user.ngo_profile.links.split("\r").each do |link| %>
+          <%= link_to link, link, target: '_blank' %> <br/>
+      <% end %>
+    </td>
+  </tr>
+
+</table>
