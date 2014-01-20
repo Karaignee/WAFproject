@@ -7,23 +7,35 @@
     <th>Title</th>
     <th>Body</th>
     <th>Contributor</th>
+    <th>Keywords</th>
     <th>Comments</th>
     <th></th>
   </tr>
 
-<% @forums.each do |forum| %>
-  <tr>
-    <td><%= forum.title %></td>      <!--TODO: make clickable -->
-    <td><%=h truncate(forum.body, :length => 20) %> </td>
-    <td> Name </td>
-    <td><%= forum.comments.count %></td>
-    <td><%= link_to 'Show', forum %></td>
-    <td><%= link_to 'Edit', edit_forum_path(forum) %></td>
-    <td><%= link_to 'Destroy', forum, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
+  <% @forums.each do |forum| %>
+      <tr>
+        <td><%= forum.title %></td>      <!--TODO: make clickable -->
+        <td><%=h truncate(forum.body, :length => 20) %> </td>
+        <td> Name </td>
+        <td> Tags: <%= raw forum.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %></td>
+        <td><%= forum.comments.count %></td>
+
+
+        <td><%= link_to 'Show', forum %></td>
+        <td><%= link_to 'Edit', edit_forum_path(forum) %></td>
+        <td><%= link_to 'Destroy', forum, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+  <% end %>
 </table>
 
 <br />
+
+<div id="tag_cloud">
+  <% tag_cloud Forum.tag_counts, %w[s m l] do |tag, css_class| %>
+      <%= link_to tag.name, tag_path(tag.name), class: css_class %>
+  <% end %>
+</div>
+...
+
 
 <%= link_to 'New Forum', new_forum_path %>

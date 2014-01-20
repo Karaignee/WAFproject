@@ -6,8 +6,11 @@ class ForumsController < ApplicationController
   #before_filter :start_breadcrumbs
 
   def index
-    @forums = Forum.all
-
+    if params[:tag]
+      @forums = Forum.tagged_with(params[:tag])
+    else
+      @forums = Forum.all
+    end
   end
 
   def show

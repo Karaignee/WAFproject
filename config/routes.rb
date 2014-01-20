@@ -1,6 +1,7 @@
 Wafproject::Application.routes.draw do
 
   resources :forums
+  get 'tags/:tag', to: 'forums#index', as: :tag
 
   resources :comments, only: [:create, :update, :destroy]
 

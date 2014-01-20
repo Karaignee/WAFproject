@@ -12,7 +12,8 @@
 
 class Forum < ActiveRecord::Base
 
-  attr_accessible :body, :title, :user_id
+  attr_accessible :body, :title, :user_id, :tag_list
+  acts_as_taggable
 
   #relationships
   belongs_to :user
