@@ -1,6 +1,17 @@
+# == Schema Information
+#
+# Table name: pledges
+#
+#  id         :integer          not null, primary key
+#  user_id    :integer
+#  task_id    :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 class Pledge < ActiveRecord::Base
 
-  attr_accessible :title, :body
+  attr_accessible :title, :body, :task_id
 
   #relationships
   belongs_to :user

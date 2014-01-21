@@ -20,13 +20,10 @@
     <%= f.text_field :summary %>
   </div>
   <div class="field">
-    <%= f.label :active %><br />
+    <%= f.label :active, "Tick to indicate project is active" %><br />
     <%= f.check_box :active %>
   </div>
-  <div class="field">
-    <%= f.label :user %><br />
-    <%= f.text_field :user %>
-  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

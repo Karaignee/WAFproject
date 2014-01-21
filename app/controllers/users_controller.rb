@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_filter :admin_required, only: [:destroy]
   #before_filter :start_breadcrumbs
 
-#TODO: method for showing the profiles will be an if, elseif, else, end statement controlling the 3 views.  Are my routes set up for this?
+  #TODO: method for showing the profiles will be an if, elseif, else, end statement controlling the 3 views.  Are my routes set up for this?
 
   def create_ngo_profile
     @ngo_profile = NgoProfile.new(params[:ngo_profile])
@@ -68,7 +68,7 @@ class UsersController < ApplicationController
     @vol_profile = VolProfile.new
   end
 
-   def new
+  def new
     @user = User.new
 
   end
@@ -93,7 +93,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
 
     if @user.update_attributes(params[:user])
-       redirect_to @user, notice: 'User was successfully updated.'
+      redirect_to @user, notice: 'User was successfully updated.'
     else
       render action: "edit"
     end

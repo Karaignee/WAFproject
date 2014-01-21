@@ -1,6 +1,6 @@
 <h1>Projects</h1>
 
-<table>
+<table>         <!-- TODO: colspan="9" class='table table-bordered table-striped'? -->
   <tr>
     <th>Title</th>
     <th>Summary</th>
@@ -13,8 +13,8 @@
 
 <% @projects.each do |project| %>
   <tr>
-    <td><%= project.title %></td>
-    <td><%= project.summary %></td>
+    <td><%= project.title %></td>   <!--TODO: make clickable -->
+    <td><%=h truncate(project.summary, :length => 40) %></td>
     <td><%= project.user %></td>
     <td><%= project.active %></td>
     <td><%= link_to 'Show', project %></td>
@@ -28,4 +28,6 @@
 
 <br />
 
-<%= link_to 'New Project', new_project_path %>
+<%= link_to 'Create a new Project', new_project_path %>
+
+

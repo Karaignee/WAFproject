@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Title:</b>
+  <b>Project Title:</b>
   <%= @project.title %>
 </p>
 
@@ -12,14 +12,68 @@
 
 <p>
   <b>Active:</b>
-  <%= @project.active %>
+  <%= @project.active %>    <!-- TODO: how to make project appear as open/closed? -->
 </p>
 
 <p>
-  <b>User:</b>
+  <b>Project Owner:</b>
   <%= @project.user %>
 </p>
 
+<h3>Tasks</h3>  <!-- TODO: why is there an error with the task index -->
+                <!-- TODO: add the pledge button to each task -->
+                <!-- TODO: how to make task appear as open/closed? -->
+<table>
+  <% @project.tasks.each do |task| %>
+      <tr>
+        <td><%= task.title %></td>
+        <td><%= task.description %> </td>
+        <td><%= task.active %></td>  <!-- TODO: how to make this appear as open/closed? -->
+        <td><%= form_for(Pledge.new) do |f| %>
+            <%= f.hidden_field :task_id, value: @task.id %>
+            <%= f.submit 'Volunteer for this task' %> </td>
+        <% end %>
+      </tr>
+  <% end %>
+</table>
+
+
+
+<h3>Add tasks</h3>   <!-- TODO: why is the task for not working - can't mass assign protected attributes: project_id -->
+
+<%= form_for(@task) do |f| %>
+    <% if @task.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h2>
+
+          <ul>
+            <% @task.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :title %><br />
+      <%= f.text_field :title %>
+    </div>
+    <div class="field">
+      <%= f.label :description %><br />
+      <%= f.text_field :description %>
+    </div>
+    <div class="field">
+      <%= f.label :active %><br />
+      <%= f.check_box :active %>
+    </div>
+    <%= f.hidden_field :project_id, value: @project.id %>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+<% end %>
 
 <%= link_to 'Edit', edit_project_path(@project) %> |
 <%= link_to 'Back', projects_path %>
+
+
+

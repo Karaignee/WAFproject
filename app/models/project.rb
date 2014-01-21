@@ -1,10 +1,24 @@
+# == Schema Information
+#
+# Table name: projects
+#
+#  id         :integer          not null, primary key
+#  title      :string(255)
+#  summary    :string(255)
+#  active     :boolean
+#  user_id    :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 class Project < ActiveRecord::Base
 
-  attr_accessible :active, :summary, :title
+  attr_accessible :active, :summary, :title, :user_id
 
 
   #relationships
   belongs_to :user
+  has_many :tasks
 
   #validation
   validates :user_id, presence: true
