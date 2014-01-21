@@ -1,5 +1,14 @@
 Wafproject::Application.routes.draw do
 
+  resources :pledges
+
+
+  resources :tasks
+
+
+  resources :projects
+
+
   resources :forums
   get 'tags/:tag', to: 'forums#index', as: :tag
 

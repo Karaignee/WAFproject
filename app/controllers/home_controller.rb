@@ -4,7 +4,7 @@ class HomeController < ApplicationController
  # before_filter :start_breadcrumbs
 
   def search
-    search_models = [User, Forum, NgoProfile]
+    search_models = [User, Forum, NgoProfile, VolProfile, Project]
     @search_results = []
     search_models.each do |a_model|
       print '->' * 20

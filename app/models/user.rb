@@ -41,7 +41,8 @@ class User < ActiveRecord::Base
   has_many :forums
   has_one :vol_profile
   has_one :ngo_profile   # if I want to enforce the rule that user can only have one profile I can call these has_one
-
+  has_many :projects
+  has_many :pledges
 
   # validation
   validates :login, presence: true, uniqueness: true,

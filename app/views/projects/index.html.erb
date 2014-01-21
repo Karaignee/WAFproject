@@ -1,0 +1,31 @@
+<h1>Projects</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Summary</th>
+    <th>Project Owner</th>
+    <th>Active</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @projects.each do |project| %>
+  <tr>
+    <td><%= project.title %></td>
+    <td><%= project.summary %></td>
+    <td><%= project.user %></td>
+    <td><%= project.active %></td>
+    <td><%= link_to 'Show', project %></td>
+    <td><%= link_to 'Edit', edit_project_path(project) %></td>
+    <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<!--TODO: write a list of tasks attached to the project using task each do || title & description, and then add the pledge button to each task -->
+
+<br />
+
+<%= link_to 'New Project', new_project_path %>
