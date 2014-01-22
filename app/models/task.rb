@@ -17,6 +17,7 @@ class Task < ActiveRecord::Base
   #relationships
   belongs_to :project
   belongs_to :user
+  has_many :pledges
 
   #validation
   validates :project_id, presence: true

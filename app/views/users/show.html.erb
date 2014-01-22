@@ -6,7 +6,7 @@
   <% end %>
 </div>
 
-<!--basic details-->
+<!--basic login details-->
 <%= render 'table' %>
 
 <% if current_user.admin? || current_user.id == @user.id %>
@@ -102,6 +102,34 @@
             <%= render partial: 'vol_form', locals: {f: f} %>
         <% end %>
 <% end %>
+
+<% if current_user.id == @user.id %>
+    <h3> Your Activity</h3>
+<% else %>
+    <h3> Member's Activity</h3>
+<% end %>
+
+<h3>Projects</h3>
+<ul>
+  <% @user.projects.each do |project| %>
+    <li><%= link_to project.title, project %>: <%= project.active ? 'uvavu' : 'iranu' %> </li>
+  <% end %>
+</ul>
+
+<h3>Pledges</h3>
+<ul>
+  <% @user.pledges.each do |pledge| %>
+    <li><%= link_to pledge.task.project.title, pledge.task.project %> <br/>
+      <%= pledge.task.title %>: <%= pledge.task.active ? 'uvavu' : 'iranu' %> </li>
+  <% end %>
+</ul>
+
+<h3>Discussions</h3>
+<ul>
+  <% @user.forums.each do |forum| %>
+    <li><%= link_to forum.title, forum %> </li>
+  <% end %>
+</ul>
 
 
 <!-- the script for showing and hiding forms -->

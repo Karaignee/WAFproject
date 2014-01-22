@@ -1,10 +1,14 @@
-<% if @search_results.size > 0 %>
-    <p>Here are your <%= @search_results.count %> results:</p>
+<h3>Search Results</h3>
 
-    <%  @search_results.each do |one_result|  %>
-        <p> <%= link_to one_result[:name], one_result[:url] %></p>
-        <p> <%= link_to 'localhost:3000' + truncate(one_result[:url], length: 50), one_result[:url] %></p>
+<% if @search_results.size > 0 %>
+    <p>You have <%= pluralize(@search_results.count, 'result') %>: </p>
+
+    <% @search_results.each do |one_result| %>
+      <div class='well'>
+        <p> <%= link_to one_result[:name], one_result[:url], style: 'color: blue;' %></p>
+        <p> <%= link_to 'localhost:3000' + truncate(one_result[:url], length: 50), one_result[:url], style: 'color: green;' %></p>
         <p> <%= one_result[:description] %></p>
+      </div>
     <% end %>
 
 <% else %>

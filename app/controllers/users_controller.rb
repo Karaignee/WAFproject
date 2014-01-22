@@ -34,7 +34,7 @@ class UsersController < ApplicationController
     @vol_profile = VolProfile.new(params[:vol_profile])
     @vol_profile.user_id = current_user.id
     if @vol_profile.save
-      flash[:success] = 'Your About section has been saved.'
+      flash[:success] = 'Your profile has been created.'
       redirect_to current_user
     else
       render 'show'
@@ -46,7 +46,7 @@ class UsersController < ApplicationController
     @vol_profile = VolProfile.find(params[:id])
     params[:vol_profile][:user_id] = current_user.id
     if @vol_profile.update_attributes(params[:vol_profile])
-      flash[:success] = 'Your skill details have been updated.'
+      flash[:success] = 'Your details have been updated.'
     else
       flash[:error] = 'Sorry, an error occurred. ' + @vol_profile.errors.full_messages.to_sentence
     end

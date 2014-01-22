@@ -1,9 +1,5 @@
-<p id="notice"><%= notice %></p>
+<h1><%= @project.title %></h1>
 
-<p>
-  <b>Project Title:</b>
-  <%= @project.title %>
-</p>
 
 <p>
   <b>Summary:</b>
@@ -11,66 +7,57 @@
 </p>
 
 <p>
-  <b>Active:</b>
-  <%= @project.active %>    <!-- TODO: how to make project appear as open/closed? -->
+  <b>Project status:</b>
+  <%= @project.active ? 'live' : 'closed' %>
+  <% if @project.user_id == current_user.id %>
+      <%= form_for(@project) do |f| %>    <!-- we need to send this form over to the projects controller, update -->
+          <%= f.hidden_field :active, value: !@project.active %>      <!--instead of using @project we can use just :active because we are already inside the form for @project and the value we put into the active field will be the opposite of what it is currently -->
+          <%= f.submit 'Change project status' %>
+      <% end %>
+  <% end %>
 </p>
 
 <p>
   <b>Project Owner:</b>
-  <%= @project.user %>
+  <%= link_to @project.user.full_name, @project.user %>
 </p>
 
-<h3>Tasks</h3>  <!-- TODO: why is there an error with the task index -->
-                <!-- TODO: add the pledge button to each task -->
-                <!-- TODO: how to make task appear as open/closed? -->
+<h3>Tasks</h3>
+
 <table>
   <% @project.tasks.each do |task| %>
-      <tr>
-        <td><%= task.title %></td>
-        <td><%= task.description %> </td>
-        <td><%= task.active %></td>  <!-- TODO: how to make this appear as open/closed? -->
-        <td><%= form_for(Pledge.new) do |f| %>
-            <%= f.hidden_field :task_id, value: @task.id %>
-            <%= f.submit 'Volunteer for this task' %> </td>
+    <tr>
+      <td><%= task.title %></td>
+      <td><%= task.description %> </td>
+      <td><%= task.active ? 'live' : 'closed' %>
+        <% if task.project.user_id ==  current_user.id %>
+          <%= form_for(task) do |f| %>
+            <%= f.hidden_field :active, value: !task.active %>
+            <%= f.submit 'Change task status' %>
+          <% end %>
         <% end %>
-      </tr>
+      </td>
+      <td>
+        <% if @project.active && task.active %>  <!-- ensuring that the ability to pledge is removed once the project AND task are closed -->
+          <%= form_for(Pledge.new) do |f| %>
+            <%= f.hidden_field :task_id, value: task.id %>
+            <%= f.submit 'Volunteer for this task' %>
+          <% end %>
+        <% end %>
+      </td>
+      <td>
+        <% task.pledges.each do |pledge| %>
+          <%= link_to pledge.user.full_name, pledge.user %>
+
+        <% end %>
+      </td>
+    </tr>
   <% end %>
 </table>
 
-
-
-<h3>Add tasks</h3>   <!-- TODO: why is the task for not working - can't mass assign protected attributes: project_id -->
-
-<%= form_for(@task) do |f| %>
-    <% if @task.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h2>
-
-          <ul>
-            <% @task.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>
-            <% end %>
-          </ul>
-        </div>
-    <% end %>
-
-    <div class="field">
-      <%= f.label :title %><br />
-      <%= f.text_field :title %>
-    </div>
-    <div class="field">
-      <%= f.label :description %><br />
-      <%= f.text_field :description %>
-    </div>
-    <div class="field">
-      <%= f.label :active %><br />
-      <%= f.check_box :active %>
-    </div>
-    <%= f.hidden_field :project_id, value: @project.id %>
-    <div class="actions">
-      <%= f.submit %>
-    </div>
-<% end %>
+<h3>Add tasks</h3>
+<% @task = @project.tasks.build  %>     <!-- projects has a rel to task table, and can ask for task table to build or create a new one -->
+<%= render partial: 'tasks/form' %>         <!-- build will make a new task (not fully created/saved) which we need to do so that projects/show understands what @task is when the partial is run -->
 
 <%= link_to 'Edit', edit_project_path(@project) %> |
 <%= link_to 'Back', projects_path %>

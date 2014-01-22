@@ -16,7 +16,7 @@
     <td>Links:</td>
     <td>
       <% @user.ngo_profile.links.split("\r").each do |link| %>
-          <%= link_to link, link, target: '_blank' %> <br/>
+        <%= link_to link, link, target: '_blank' %> <br/>
       <% end %>
     </td>
   </tr>

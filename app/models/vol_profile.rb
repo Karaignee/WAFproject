@@ -22,7 +22,7 @@ class VolProfile < ActiveRecord::Base
 
   def self.search_request(vol_profile_search)
     search_result = []
-    records = where('about LIKE ? or details LIKE ? or skills LIKE ?', '%' + ngo_profile_search + '%', '%' + ngo_profile_search + '%', '%' + ngo_profile_search + '%')
+    records = where('about LIKE ? or details LIKE ? or skills LIKE ?', '%' + vol_profile_search + '%', '%' + vol_profile_search + '%', '%' + vol_profile_search + '%')
     records.each do |x|
       search_result << {model_name: 'VolProfile', url: '/users/' + x.user_id.to_s, name: x.about, description: x.details}
     end

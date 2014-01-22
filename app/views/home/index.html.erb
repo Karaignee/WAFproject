@@ -1,16 +1,16 @@
 
 <!-- Bootstrap Jumbotron -->
-<div class="jumbotron" xmlns="http://www.w3.org/1999/html">
+<div class="hero-unit">
   <h1>Marketing stuff!</h1>
   <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
 
 
   <% if current_user %>
-      <li><%= link_to 'My Account', my_account_url, class:"btn btn-success" %></li>
-      <li><%= link_to 'Sign Out', logout_url, class:"btn btn-success" %>  </li>  </br>
+      <%= link_to 'My Account', my_account_url, class:"btn btn-primary" %>
+      <%= link_to 'Sign Out', logout_url, class:"btn" %>
   <% else %>
-      <li><%= link_to 'Sign Up', sign_up_url, class:"btn btn-success" %> </li>
-      <li><%= link_to 'Sign In', sign_in_url, class:"btn btn-success" %> </li>
+      <%= link_to 'Sign Up', sign_up_url, class:"btn" %>
+      <%= link_to 'Sign In', sign_in_url, class:"btn" %>
   <% end %>
 </div>
 
@@ -21,12 +21,20 @@
   <div class="span4">
     <h2>Volunteers</h2>
     <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-    <p><a class="btn" href="#">link_to &raquo;</a></p>
+    <p>
+      <% if current_user %>
+        <%= link_to 'List of volunteers', users_url, class: 'btn' %>
+      <% end %>
+      <%= link_to 'Become a volunteer', sign_up_url, class: 'btn' %>
+    </p>
   </div>
   <div class="span4">
     <h2>Charities</h2>
     <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-    <p><a class="btn" href="#">link_to &raquo;</a></p>
+    <p>
+      <a class="btn" href="#">link_to &raquo;</a>
+      <%= link_to 'Become a volunteer', sign_up_url %>
+    </p>
   </div>
   <div class="span4">
     <h2>Projects</h2>

@@ -5,7 +5,7 @@
     <th>Title</th>
     <th>Summary</th>
     <th>Project Owner</th>
-    <th>Active</th>
+    <th>Status</th>
     <th></th>
     <th></th>
     <th></th>
@@ -15,8 +15,8 @@
   <tr>
     <td><%= project.title %></td>   <!--TODO: make clickable -->
     <td><%=h truncate(project.summary, :length => 40) %></td>
-    <td><%= project.user %></td>
-    <td><%= project.active %></td>
+    <td><%= project.user.full_name %></td>
+    <td><%= project.active ? 'live' : 'complete' %></td>
     <td><%= link_to 'Show', project %></td>
     <td><%= link_to 'Edit', edit_project_path(project) %></td>
     <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
