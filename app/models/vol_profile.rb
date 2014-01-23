@@ -20,6 +20,12 @@ class VolProfile < ActiveRecord::Base
   #relationships
   belongs_to :user
 
+  #methods
+  def full_name
+    return first_name.titleize + " " + last_name.gsub("O'", "O' ").titleize.gsub("O' ", "O'")
+  end
+
+
   def self.search_request(vol_profile_search)
     search_result = []
     records = where('about LIKE ? or details LIKE ? or skills LIKE ?', '%' + vol_profile_search + '%', '%' + vol_profile_search + '%', '%' + vol_profile_search + '%')

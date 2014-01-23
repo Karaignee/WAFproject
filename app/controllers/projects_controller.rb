@@ -1,7 +1,7 @@
 class ProjectsController < ApplicationController
 
-  before_filter :admin_required, except: [:create, :update ]
- # before_filter :ngo_required, except: [:show, :index ]      TODO: I need a filter like with admin
+  before_filter :admin_required, except: [:index, :show, :create, :new ]
+  before_filter :logged_in_required, except: [:index]
 
 
   def index
@@ -13,7 +13,7 @@ class ProjectsController < ApplicationController
   # GET /projects/1.json
   def show
     @project = Project.find(params[:id])
-    @task = Task.new    #TODO: is this correct? new?
+    @task = Task.new
 
 
   end

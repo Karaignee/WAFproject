@@ -62,7 +62,7 @@ class User < ActiveRecord::Base
   end
 
   def admin?
-    self.user_group.is_an_admin
+    self.user_group && self.user_group.is_an_admin
   end
 
   def charity?

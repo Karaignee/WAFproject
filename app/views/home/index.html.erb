@@ -1,8 +1,8 @@
 
 <!-- Bootstrap Jumbotron -->
 <div class="hero-unit">
-  <h1>Marketing stuff!</h1>
-  <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+  <h1>Tech for Charity!</h1>
+  <p class="lead">Welcome to this prototype application which helps charities and NGOs talk to would-be volunteers. We help people with technical skills to talk to worthy causes they are interested in.  We help organisations find people who are willing to volunteer their skills.  Please visit out FORUM where you can join in discussion about issues organisations are having, area they would like help developing or potential projects.  You can also browse our list of PROFILES to see what Charities and Volunteers are already signed up and what kind of things they are doing!!!</p>
 
 
   <% if current_user %>
@@ -20,7 +20,7 @@
 <div class="row-fluid">
   <div class="span4">
     <h2>Volunteers</h2>
-    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+    <p>Sign up and you will see ways in which you can help worthy causes, sometimes by just contributing to online discussions and questions, or getting involved in a new project </p>
     <p>
       <% if current_user %>
         <%= link_to 'List of volunteers', users_url, class: 'btn' %>
@@ -30,16 +30,18 @@
   </div>
   <div class="span4">
     <h2>Charities</h2>
-    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+    <p> As a member, your organisation will have access to a wealth of knowledge in our discussion groups, as well as an efficient way to find help with tasks and projects. </p>
     <p>
-      <a class="btn" href="#">link_to &raquo;</a>
-      <%= link_to 'Become a volunteer', sign_up_url %>
+      <% if current_user %>
+        <%= link_to 'List of charities', users_url, class: 'btn' %>
+      <% end %>
+      <%= link_to 'Sign your organisation up', sign_up_url, class: 'btn' %>
     </p>
   </div>
   <div class="span4">
     <h2>Projects</h2>
-    <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.</p>
-    <p><li><%= link_to 'Projects', projects_path, class:"btn" %> </li>
+    <p>Take a look through some of the fantastic causes who have already found help here, projects completed, and work that still needs your help!</p>
+    <p><%= link_to 'Projects', projects_path, class:"btn" %>
     </p>
   </div>
 </div>

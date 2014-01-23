@@ -1,32 +1,33 @@
 <div class="page-header">
-  <% if current_user.id == @user.id %>
-      <h1> Your Profile</h1>
+  <% if current_user && current_user.id == @user.id %>
+    <h1> Your Profile</h1>
   <% else %>
-      <h1> Member's Profile</h1>
+    <h1> Member's Profile</h1>
   <% end %>
 </div>
 
-<!--basic login details-->
-<%= render 'table' %>
+<div class='span6'>
+  <!--basic login details-->
+  <%= render 'table' %>
 
-<% if current_user.admin? || current_user.id == @user.id %>
+  <% if current_user.admin? || current_user.id == @user.id %>
     <%= link_to 'Edit log-in details', edit_user_path(@user) %>
-<% end %>
-<% if current_user.admin? %>
+  <% end %>
+  <% if current_user.admin? %>
     | <%= link_to 'Back', users_path %>
-<% end %>
+  <% end %>
 
-<!-- view edit create charity, ngo, profiles -->
-<% if @user.ngo_profile %>
+  <!-- view edit create charity, ngo, profiles -->
+  <% if @user.ngo_profile %>
     <div id="view_ngo_profile">
       <!--view-->
       <%= render 'ngo_about' %>
 
     </div>
-<% end %>
+  <% end %>
 
-<!-- begin edit ngo restrictions -->
-<% if @user.ngo_profile && (current_user.id == @user.id || current_user.admin?) %>
+  <!-- begin edit ngo restrictions -->
+  <% if @user.ngo_profile && (current_user.id == @user.id || current_user.admin?) %>
     <%= link_to 'Edit NGO Profile', '#', onclick: "showNgoEditProfile(); return false;" %>
 
     <!-- edit -->
@@ -34,121 +35,123 @@
     <div id="edit_the_ngo_form" class="hidden">
       <h4>Edit your NGO Profile:</h4>
       <%= form_for(@user.ngo_profile, url: update_ngo_profile_url) do |f| %>
-          <%= hidden_field_tag :id, @user.ngo_profile.id %>
-          <% if @ngo_profile.errors.any? %>
-              <div id="error_explanation">
-                <h2><%= pluralize(@ngo_profile.errors.count, "error") %> prohibited this profile from being saved:</h2>
-              </div>
-          <% end %>
-          <%= render partial: 'ngo_form', locals: {f: f} %>
+        <%= hidden_field_tag :id, @user.ngo_profile.id %>
+        <% if @user.ngo_profile.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@ngo_profile.errors.count, "error") %> prohibited this profile from being saved:</h2>
+          </div>
+        <% end %>
+        <%= render partial: 'ngo_form', locals: {f: f} %>
       <% end %>
     </div>
     <!-- end edit ngo restrictions -->
-<% end %>
+  <% end %>
 
 
-<% if @user.charity? && !@user.ngo_profile && (current_user.id == @user.id || current_user.admin?)  %>     <!-- the brackets get done first, you have to be a charity, with no profile and be admin or owner -->
+  <% if @user.charity? && !@user.ngo_profile && (current_user.id == @user.id || current_user.admin?)  %>     <!-- the brackets get done first, you have to be a charity, with no profile and be admin or owner -->
     <!--create-->
     <h4>Create a new NGO Profile</h4>
     <%= form_for(@ngo_profile, url: create_ngo_profile_url) do |f| %>    <!--needed to specify the url here because there is no controller for @ngo_profile-->
-        <% if @ngo_profile.errors.any? %>
-            <div id="error_explanation">
-              <h2><%= pluralize(@ngo_profile.errors.count, "error") %> prohibited this profile from being saved:</h2>
-            </div>
-        <% end %>
-        <%= render partial: 'ngo_form', locals: {f: f} %>
+      <% if @ngo_profile.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@ngo_profile.errors.count, "error") %> prohibited this profile from being saved:</h2>
+        </div>
+      <% end %>
+      <%= render partial: 'ngo_form', locals: {f: f} %>
     <% end %>
-<% end %>
+  <% end %>
 
-<!-- view edit create volunteer profiles -->
-<% if @user.vol_profile %>
+  <!-- view edit create volunteer profiles -->
+  <% if @user.vol_profile %>
     <div id="view_vol_profile">
       <!--view-->
       <%= render 'vol_about' %>
     </div>
-<% end %>
+  <% end %>
 
-<!-- begin edit volunteer restrictions -->
-<% if @user.vol_profile && (current_user.id == @user.id || current_user.admin?) %>
+  <!-- begin edit volunteer restrictions -->
+  <% if @user.vol_profile && (current_user.id == @user.id || current_user.admin?) %>
     <%= link_to 'Edit Volunteer Profile', '#', onclick: "showVolEditProfile(); return false;" %>
 
-     <!--edit-->
-     <div id="edit_the_vol_form" class="hidden">
+    <!--edit-->
+    <div id="edit_the_vol_form" class="hidden">
       <h4>Edit your Volunteer Profile:</h4>
       <%= form_for(@user.vol_profile, url: update_vol_profile_url) do |f| %>
-          <%= hidden_field_tag :id, @user.vol_profile.id %>
-          <% if @vol_profile.errors.any? %>
-              <div id="error_explanation">
-                <h2><%= pluralize(@vol_profile.errors.count, "error") %> prohibited this profile from being saved:</h2>
-              </div>
-          <% end %>
-          <%= render partial: 'vol_form', locals: {f: f} %>
+        <%= hidden_field_tag :id, @user.vol_profile.id %>
+        <% if @user.vol_profile.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@vol_profile.errors.count, "error") %> prohibited this profile from being saved:</h2>
+          </div>
+        <% end %>
+        <%= render partial: 'vol_form', locals: {f: f} %>
       <% end %>
     </div>
     <!-- end edit volunteer restrictions -->
-<% end %>
+  <% end %>
 
-<% if @user.volunteer? && !@user.vol_profile && (current_user.id == @user.id || current_user.admin?)  %>
-        <!-- the brackets get done first, you have to be a volunteer, with no profile and be admin or owner -->
-        <!--create-->
-        <h4>Create a new Volunteer Profile</h4>
-        <%= form_for(@vol_profile, url: create_vol_profile_url) do |f| %>
-            <!--needed to specify the url here because there is no controller for @vol_profile-->
-            <% if @vol_profile.errors.any? %>
-                <div id="error_explanation">
-                  <h2><%= pluralize(@vol_profile.errors.count, "error") %> prohibited this profile from being saved:</h2>
-                </div>
-            <% end %>
-            <%= render partial: 'vol_form', locals: {f: f} %>
-        <% end %>
-<% end %>
+  <% if @user.volunteer? && !@user.vol_profile && (current_user.id == @user.id || current_user.admin?)  %>
+    <!-- the brackets get done first, you have to be a volunteer, with no profile and be admin or owner -->
+    <!--create-->
+    <h4>Create a new Volunteer Profile</h4>
+    <%= form_for(@vol_profile, url: create_vol_profile_url) do |f| %>
+      <!--needed to specify the url here because there is no controller for @vol_profile-->
+      <% if @vol_profile.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@vol_profile.errors.count, "error") %> prohibited this profile from being saved:</h2>
+        </div>
+      <% end %>
+      <%= render partial: 'vol_form', locals: {f: f} %>
+    <% end %>
+  <% end %>
 
-<% if current_user.id == @user.id %>
+</div>
+
+<div class='span5'>
+
+  <% if current_user.id == @user.id %>
     <h3> Your Activity</h3>
-<% else %>
+  <% else %>
     <h3> Member's Activity</h3>
-<% end %>
-
-<h3>Projects</h3>
-<ul>
-  <% @user.projects.each do |project| %>
-    <li><%= link_to project.title, project %>: <%= project.active ? 'uvavu' : 'iranu' %> </li>
   <% end %>
-</ul>
 
-<h3>Pledges</h3>
-<ul>
-  <% @user.pledges.each do |pledge| %>
-    <li><%= link_to pledge.task.project.title, pledge.task.project %> <br/>
-      <%= pledge.task.title %>: <%= pledge.task.active ? 'uvavu' : 'iranu' %> </li>
-  <% end %>
-</ul>
+  <h3>Projects</h3>
+  <ul>
+    <% @user.projects.each do |project| %>
+      <li><%= link_to project.title, project %>: <%= project.active ? 'uvavu' : 'iranu' %> </li>
+    <% end %>
+  </ul>
 
-<h3>Discussions</h3>
-<ul>
-  <% @user.forums.each do |forum| %>
-    <li><%= link_to forum.title, forum %> </li>
-  <% end %>
-</ul>
+  <h3>Pledges</h3>
+  <ul>
+    <% @user.pledges.each do |pledge| %>
+      <li><%= link_to pledge.task.project.title, pledge.task.project %> <br/>
+        <%= pledge.task.title %>: <%= pledge.task.active ? 'uvavu' : 'iranu' %> </li>
+    <% end %>
+  </ul>
 
+  <h3>Discussions</h3>
+  <ul>
+    <% @user.forums.each do |forum| %>
+      <li><%= link_to forum.title, forum %> </li>
+    <% end %>
+  </ul>
+</div>
 
 <!-- the script for showing and hiding forms -->
 <script>
 
-    function showNgoEditProfile() {
-        // hide the show part
-        $('#view_ngo_profile').hide();
-        // reveal the edit form
-        $('#edit_the_ngo_form').removeClass('hidden');
-    }
+  function showNgoEditProfile() {
+    // hide the show part
+    $('#view_ngo_profile').hide();
+    // reveal the edit form
+    $('#edit_the_ngo_form').removeClass('hidden');
+  }
 
-    function showVolEditProfile() {
-        // hide the show part
-        $('#view_vol_profile').hide();
-        // reveal the edit form
-        $('#edit_the_vol_form').removeClass('hidden');
-    }
+  function showVolEditProfile() {
+    // hide the show part
+    $('#view_vol_profile').hide();
+    // reveal the edit form
+    $('#edit_the_vol_form').removeClass('hidden');
+  }
 
 </script>
-
-

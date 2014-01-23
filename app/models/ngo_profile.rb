@@ -23,6 +23,10 @@ class NgoProfile < ActiveRecord::Base
   belongs_to :user
 
   #methods
+  def full_name
+    return first_name.titleize + " " + last_name.gsub("O'", "O' ").titleize.gsub("O' ", "O'")
+  end
+
   def self.search_request(ngo_profile_search)
     search_result = []
     records = where('about LIKE ? or details LIKE ? or links LIKE ? or name LIKE ?', '%' + ngo_profile_search + '%', '%' + ngo_profile_search + '%', '%' + ngo_profile_search + '%', '%' + ngo_profile_search + '%')
