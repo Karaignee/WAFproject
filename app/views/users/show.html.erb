@@ -117,7 +117,7 @@
   <h3>Projects</h3>
   <ul>
     <% @user.projects.each do |project| %>
-      <li><%= link_to project.title, project %>: <%= project.active ? 'uvavu' : 'iranu' %> </li>
+      <li><%= link_to project.title, project %>: <%= project.active ? 'active' : 'closed' %> </li>
     <% end %>
   </ul>
 
@@ -125,7 +125,7 @@
   <ul>
     <% @user.pledges.each do |pledge| %>
       <li><%= link_to pledge.task.project.title, pledge.task.project %> <br/>
-        <%= pledge.task.title %>: <%= pledge.task.active ? 'uvavu' : 'iranu' %> </li>
+        <%= pledge.task.title %>: <%= pledge.task.active ? 'active' : 'closed' %> </li>
     <% end %>
   </ul>
 
